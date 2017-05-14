@@ -1,0 +1,149 @@
+
+var onOpenDocument = function(context) {
+
+    var updateURL = "http://127.0.0.1:4000/version.json";
+    var dataURL = "http://127.0.0.1:4000/data.json";
+
+    // Check version
+    var localVersion = context.plugin.version();
+    var checkVersion = getRemoteJson(updateURL);
+    if (checkVersion) {
+        var remoteVersion = checkVersion.version;
+        if (localVersion < remoteVersion) {
+
+            var localManifestPath = context.plugin.url().path() + "/Contents/Sketch/manifest.json";
+            var localManifest = getLocalJson(originalManifestPath);
+
+            // Version
+            localManifest.version = remoteVersion;
+
+            // URL data
+            var urlDataPath = context.plugin.url().path() + "/Contents/Resources/data.json";
+            var urls = {};
+
+            // Menu and commands
+            var data = getRemoteJson(dataURL);
+            data.sort(function(a, b) {
+                if (a.title > b.title) {
+                    return 1;
+                }
+                if (a.title < b.title) {
+                    return -1;
+                }
+                return 0;
+            });
+
+            localManifest.commands = [
+                {
+                    "handlers": {
+                        "actions": {
+                            "OpenDocument": "onOpenDocument"
+                        }
+                    },
+                    "script": "design_systems.cocoascript"
+                },
+                {
+                    "name": "Report Issues",
+                    "identifier": "report_issues",
+                    "handler": "reportIssues",
+                    "script": "design_systems.cocoascript"
+                }
+            ];
+            localManifest.menu.items = [];
+
+            for (var i = 0; i < data.length; i++) {
+
+                var menu = {
+                    "title": data[i].title,
+                    "items": []
+                };
+
+                for (var j = 0; j < data[i].commands.length; j++) {
+                    if (data[i].commands[j].name === "-") {
+                        menu.items.push("-");
+                    } else {
+                        var command = {
+                            "name": data[i].commands[j].name,
+                            "identifier": "id_" + i + "_" + j,
+                            "script": "design_systems.cocoascript"
+                        };
+                        localManifest.commands.push(command);
+                        menu.items.push(command.identifier);
+
+                        urls[command.identifier] = {
+                            "url": data[i].commands[j].url,
+                            "type": data[i].commands[j].type || "site"
+                        };
+                    }
+                }
+
+                localManifest.menu.items.push(menu);
+                localManifest.menu.items.push("-");
+                localManifest.menu.items.push("report_issues");
+
+            }
+
+            // Write data.json
+            writeContentToFile(urlDataPath, JSON.stringify(urls, null, 2));
+
+            // Write new manifest.json
+            writeContentToFile(localManifestPath, JSON.stringify(localManifest, null, 2));
+
+            // Reload plugins
+            AppController.sharedInstance().pluginManager().reloadPlugins();
+
+            // log(JSON.stringify(localManifest.commands, null, 4));
+            // log(JSON.stringify(localManifest.menu.items, null, 4));
+            // log(JSON.stringify(localManifest, null, 4));
+        }
+    } else {
+        log("Plugin Design Systems can't visit \"" + updateURL + "\".");
+    }
+};
+
+var onRun = function(context) {
+    var pluginIdentifier = context.command.identifier();
+
+
+
+};
+
+var reportIssues = function(context) {
+    context.plugin.homepageURL().URLByAppendingPathComponent("issues");
+
+    // /issues/new?title=new&body=xxx
+};
+
+
+
+
+function getLocalJson(path) {
+    if (NSFileManager.defaultManager().fileExistsAtPath_(path)) {
+        var content = NSString.stringWithContentsOfFile_encoding_error_(path, NSUTF8StringEncoding, nil);
+        return JSON.parse(content);
+    } else {
+        return null;
+    }
+}
+
+function getRemoteJson(url) {
+    var request = NSURLRequest.requestWithURL(NSURL.URLWithString(url));
+    var response = NSURLConnection.sendSynchronousRequest_returningResponse_error_(request, nil, nil);
+    if (response) {
+        var content = NSString.alloc().initWithData_encoding_(response, NSUTF8StringEncoding);
+        return JSON.parse(content);
+    } else {
+        return null;
+    }
+}
+
+function writeContentToFile(path, content) {
+    NSString.stringWithString(content).writeToFile_atomically_encoding_error_(
+        path, true, NSUTF8StringEncoding, nil
+    );
+}
+
+function openUrlInBrowser(url) {
+    NSWorkspace.sharedWorkspace().openURL(NSURL.URLWithString(url));
+}
+

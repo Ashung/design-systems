@@ -1,0 +1,34 @@
+{
+  "name": "Design Systems",
+  "description": "design systems.",
+  "author": "Ashung Hung",
+  "email": "Ashung.hung@gmail.com",
+  "homepage": "https://github.com/Ashung/Design_Systems",
+  "version": "1",
+  "identifier": "com.ashung.hung.design_systems",
+  "compatibleVersion": "3",
+  "bundleVersion": "1",
+  "commands": [
+    {
+      "handlers": {
+        "actions": {
+          "OpenDocument": "onOpenDocument"
+        }
+      },
+      "script": "design_systems.cocoascript"
+    },
+    {
+      "name": "Report Issues",
+      "identifier": "report_issues",
+      "handler": "reportIssues",
+      "script": "design_systems.cocoascript"
+    }
+  ],
+  "menu": {
+    "isRoot": false,
+    "title": "Design Systems",
+    "items": [
+      "report_issues"
+    ]
+  }
+}
