@@ -12,13 +12,13 @@ var onOpenDocument = function(context) {
         if (localVersion < remoteVersion) {
 
             var localManifestPath = context.plugin.url().path() + "/Contents/Sketch/manifest.json";
-            var localManifest = getLocalJson(originalManifestPath);
+            var localManifest = getLocalJson(localManifestPath);
 
             // Version
             localManifest.version = remoteVersion;
 
             // URL data
-            var urlDataPath = context.plugin.url().path() + "/Contents/Resources/data.json";
+            var localDataPath = context.plugin.url().path() + "/Contents/Resources/data.json";
             var urls = {};
 
             // Menu and commands
@@ -78,13 +78,14 @@ var onOpenDocument = function(context) {
                 }
 
                 localManifest.menu.items.push(menu);
-                localManifest.menu.items.push("-");
-                localManifest.menu.items.push("report_issues");
 
             }
 
+            localManifest.menu.items.push("-");
+            localManifest.menu.items.push("report_issues");
+
             // Write data.json
-            writeContentToFile(urlDataPath, JSON.stringify(urls, null, 2));
+            writeContentToFile(localDataPath, JSON.stringify(urls, null, 2));
 
             // Write new manifest.json
             writeContentToFile(localManifestPath, JSON.stringify(localManifest, null, 2));
@@ -102,20 +103,26 @@ var onOpenDocument = function(context) {
 };
 
 var onRun = function(context) {
+
+    var localDataPath = context.plugin.urlForResourceNamed("data.json").path();
     var pluginIdentifier = context.command.identifier();
+    var localData = getLocalJson(localDataPath);
 
+    if (localData) {
 
+        log(localData[pluginIdentifier]);
+
+    } else {
+        log("Read file " + localDataPath + " error.");
+    }
 
 };
 
 var reportIssues = function(context) {
-    context.plugin.homepageURL().URLByAppendingPathComponent("issues");
-
-    // /issues/new?title=new&body=xxx
+    var url = context.plugin.homepageURL() + "issues/new";
+    openUrlInBrowser(url);
+    // /issues/new?title=xxx&body=xxx
 };
-
-
-
 
 function getLocalJson(path) {
     if (NSFileManager.defaultManager().fileExistsAtPath_(path)) {
