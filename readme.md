@@ -1,9 +1,18 @@
+# Design Systems
 
+A Sketch app plugin that help you find out popular design systems and download official Sketch UI kit.
 
-[](http://fluent.microsoft.com/)
+## Installation
 
-https://polaris.shopify.com/
+- Search "Design Systems" from [Sketch Runner](http://sketchrunner.com/) or [Sketchpacks](https://sketchpacks.com/).
+- Download [master.zip](https://github.com/Ashung/Design_Systems/archive/master.zip), unzip it, double-click the "Design_Systems.sketchplugin".
 
-https://www.lightningdesignsystem.com/
+## License
 
-http://carbondesignsystem.com/
+![cc-by-sa-4.0](https://i.creativecommons.org/l/by-sa/4.0/80x15.png) [CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)
+
+## Donate
+
+Donate [$1.00](https://www.paypal.me/ashung/1)  [$2.00](https://www.paypal.me/ashung/2)  [$5.00](https://www.paypal.me/ashung/5) via PayPal.
+
+通过 [微信](http://ashung.github.io/donate.html) 或 [支付宝](http://ashung.github.io/donate.html) 打赏。

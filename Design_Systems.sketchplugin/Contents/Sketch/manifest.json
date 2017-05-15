@@ -1,6 +1,6 @@
 {
   "name": "Design Systems",
-  "description": "design systems.",
+  "description": "A Sketch app plugin that help you find out popular design systems and download official Sketch UI kit.",
   "author": "Ashung Hung",
   "email": "Ashung.hung@gmail.com",
   "homepage": "https://github.com/Ashung/Design_Systems",
@@ -22,13 +22,20 @@
       "identifier": "report_issues",
       "handler": "reportIssues",
       "script": "design_systems.cocoascript"
+    },
+    {
+      "name": "Submit a Design System",
+      "identifier": "submit",
+      "handler": "submit",
+      "script": "design_systems.cocoascript"
     }
   ],
   "menu": {
     "isRoot": false,
     "title": "Design Systems",
     "items": [
-      "report_issues"
+      "report_issues",
+      "submit"
     ]
   }
 }

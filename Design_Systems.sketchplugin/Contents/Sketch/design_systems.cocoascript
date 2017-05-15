@@ -1,21 +1,30 @@
 
 var onOpenDocument = function(context) {
 
-    var updateURL = "http://127.0.0.1:4000/version.json";
-    var dataURL = "http://127.0.0.1:4000/data.json";
+    var updateURL = "https://ashung.github.io/Design_Systems/version.json";
+    var dataURL = "https://ashung.github.io/Design_Systems/data.json";
+    
+    var pluginName = context.plugin.name();
 
+    // Reload plugins
+    AppController.sharedInstance().pluginManager().reloadPlugins();
+    
     // Check version
     var localVersion = context.plugin.version();
     var checkVersion = getRemoteJson(updateURL);
     if (checkVersion) {
+        
         var remoteVersion = checkVersion.version;
+        
+        log(pluginName + ": localVersion is " + localVersion + ", remoteVersion is " + remoteVersion);
+        
         if (localVersion < remoteVersion) {
 
             var localManifestPath = context.plugin.url().path() + "/Contents/Sketch/manifest.json";
             var localManifest = getLocalJson(localManifestPath);
 
             // Version
-            localManifest.version = remoteVersion;
+            localManifest.version = localVersion.substring(0, localVersion.indexOf(".") + 1) + remoteVersion;
 
             // URL data
             var localDataPath = context.plugin.url().path() + "/Contents/Resources/data.json";
@@ -32,7 +41,8 @@ var onOpenDocument = function(context) {
                 }
                 return 0;
             });
-
+            
+            // Reset commands and menu items
             localManifest.commands = [
                 {
                     "handlers": {
@@ -46,6 +56,12 @@ var onOpenDocument = function(context) {
                     "name": "Report Issues",
                     "identifier": "report_issues",
                     "handler": "reportIssues",
+                    "script": "design_systems.cocoascript"
+                },
+                {
+                    "name": "Submit a Design System",
+                    "identifier": "submit",
+                    "handler": "submit",
                     "script": "design_systems.cocoascript"
                 }
             ];
@@ -71,6 +87,8 @@ var onOpenDocument = function(context) {
                         menu.items.push(command.identifier);
 
                         urls[command.identifier] = {
+                            "category": data[i].title,
+                            "name": data[i].commands[j].name,
                             "url": data[i].commands[j].url,
                             "type": data[i].commands[j].type || "site"
                         };
@@ -83,6 +101,7 @@ var onOpenDocument = function(context) {
 
             localManifest.menu.items.push("-");
             localManifest.menu.items.push("report_issues");
+            localManifest.menu.items.push("submit");
 
             // Write data.json
             writeContentToFile(localDataPath, JSON.stringify(urls, null, 2));
@@ -93,12 +112,11 @@ var onOpenDocument = function(context) {
             // Reload plugins
             AppController.sharedInstance().pluginManager().reloadPlugins();
 
-            // log(JSON.stringify(localManifest.commands, null, 4));
-            // log(JSON.stringify(localManifest.menu.items, null, 4));
-            // log(JSON.stringify(localManifest, null, 4));
+            log(pluginName + ": update finish.");
+            
         }
     } else {
-        log("Plugin Design Systems can't visit \"" + updateURL + "\".");
+        log(pluginName + ": Can't visit " + updateURL + ".");
     }
 };
 
@@ -110,18 +128,39 @@ var onRun = function(context) {
 
     if (localData) {
 
-        log(localData[pluginIdentifier]);
+        var url = localData[pluginIdentifier].url;
+        
+        if (localData[pluginIdentifier].type === "site") {
+            var ref = context.plugin.homepageURL().toString().replace(new RegExp("http[s]*:\/\/"), "");
+            url = url + "?ref=" + ref;
+        }
+        
+        // Google Analytics
+        ga(
+            "UA-99098773-2",
+            encodeURI(context.plugin.name()),
+            context.plugin.identifier(),
+            context.plugin.version(),
+            encodeURI(localData[pluginIdentifier].category),
+            encodeURI(localData[pluginIdentifier].name)
+        );
+
+        openUrlInBrowser(url);
 
     } else {
-        log("Read file " + localDataPath + " error.");
+        log(pluginName + ": Read file " + localDataPath + " error.");
     }
 
 };
 
 var reportIssues = function(context) {
-    var url = context.plugin.homepageURL() + "issues/new";
+    var url = context.plugin.homepageURL() + "/issues/new";
     openUrlInBrowser(url);
-    // /issues/new?title=xxx&body=xxx
+};
+
+var submit = function(context) {
+    var url = context.plugin.homepageURL() + "/issues/new?title=Add%20a%20Design%20System&body=Tell%20me%20the%20url";
+    openUrlInBrowser(url);
 };
 
 function getLocalJson(path) {
@@ -154,3 +193,51 @@ function openUrlInBrowser(url) {
     NSWorkspace.sharedWorkspace().openURL(NSURL.URLWithString(url));
 }
 
+function ga(tarkingId, appName, appId, appVersion, eventCategory, eventAction) {
+
+    var uuidKey = 'google.analytics.uuid';
+    var uuid = NSUserDefaults.standardUserDefaults().objectForKey(uuidKey);
+    if (!uuid) {
+        uuid = NSUUID.UUID().UUIDString();
+        NSUserDefaults.standardUserDefaults().setObject_forKey(uuid, uuidKey);
+    }
+    
+    // IP
+    // var ip = NSString.stringWithContentsOfURL_encoding_error_(
+    //     NSURL.URLWithString("https://icanhazip.com/"),
+    //     NSUTF8StringEncoding,
+    //     nil
+    // ).stringByTrimmingCharactersInSet(NSCharacterSet.newlineCharacterSet());
+    
+    var url = "https://www.google-analytics.com/collect?";
+    url += "v=1" + "&";
+    // Tracking ID
+    url += "tid=" + tarkingId + "&";
+    // Source
+    url += "ds=sketch" + MSApplicationMetadata.metadata().appVersion + "&";
+    // Client ID
+    url += "cid=" + uuid + "&";
+    // User IP
+    // url += "uip=" + ip + "&";
+    // User GEO location
+    url += "geoid=" + NSLocale.currentLocale().countryCode() + "&";
+    // User language
+    url += "ul=" + NSLocale.currentLocale().localeIdentifier().toLowerCase() + "&";
+    // pageview, screenview, event, transaction, item, social, exception, timing
+    url += "t=event" + "&";
+    // App Name
+    url += "an=" + appName + "&";
+    // App ID
+    url += "aid=" + appId + "&";
+    // App Version
+    url += "av=" + appVersion + "&";
+    // Event category
+    url += "ec=" + eventCategory + "&";
+    // Event action
+    url += "ea=" + eventAction;
+    
+    var session = NSURLSession.sharedSession();
+    var task = session.dataTaskWithURL(NSURL.URLWithString(NSString.stringWithString(url)));
+    task.resume();
+
+}
