@@ -1,8 +1,14 @@
+//
+// Design Systems
+// Homepage: https://github.com/Ashung/design-systems
+// Author: Ashung Hung
+// Email: Ashung.hung@gmail.com
+// License: https://creativecommons.org/licenses/by-sa/4.0
 
 var onOpenDocument = function(context) {
 
-    var updateURL = "https://ashung.github.io/Design_Systems/version.json";
-    var dataURL = "https://ashung.github.io/Design_Systems/data.json";
+    var updateURL = "https://ashung.github.io/design-systems/version.json";
+    var dataURL = "https://ashung.github.io/design-systems/data.json";
     
     var pluginName = context.plugin.name();
 
@@ -112,7 +118,7 @@ var onOpenDocument = function(context) {
             // Reload plugins
             AppController.sharedInstance().pluginManager().reloadPlugins();
 
-            log(pluginName + ": update finish.");
+            log(pluginName + ": Data update complete.");
             
         }
     } else {
@@ -166,7 +172,12 @@ var submit = function(context) {
 function getLocalJson(path) {
     if (NSFileManager.defaultManager().fileExistsAtPath_(path)) {
         var content = NSString.stringWithContentsOfFile_encoding_error_(path, NSUTF8StringEncoding, nil);
-        return JSON.parse(content);
+        try {
+            return JSON.parse(content);
+        } catch (e) {
+            log(e);
+            return null;
+        }
     } else {
         return null;
     }
@@ -177,7 +188,12 @@ function getRemoteJson(url) {
     var response = NSURLConnection.sendSynchronousRequest_returningResponse_error_(request, nil, nil);
     if (response) {
         var content = NSString.alloc().initWithData_encoding_(response, NSUTF8StringEncoding);
-        return JSON.parse(content);
+        try {
+            return JSON.parse(content);
+        } catch (e) {
+            log(e);
+            return null;
+        }
     } else {
         return null;
     }
@@ -193,7 +209,7 @@ function openUrlInBrowser(url) {
     NSWorkspace.sharedWorkspace().openURL(NSURL.URLWithString(url));
 }
 
-function ga(tarkingId, appName, appId, appVersion, eventCategory, eventAction) {
+function ga(trackingID, appName, appId, appVersion, eventCategory, eventAction) {
 
     var uuidKey = 'google.analytics.uuid';
     var uuid = NSUserDefaults.standardUserDefaults().objectForKey(uuidKey);
@@ -202,23 +218,14 @@ function ga(tarkingId, appName, appId, appVersion, eventCategory, eventAction) {
         NSUserDefaults.standardUserDefaults().setObject_forKey(uuid, uuidKey);
     }
     
-    // IP
-    // var ip = NSString.stringWithContentsOfURL_encoding_error_(
-    //     NSURL.URLWithString("https://icanhazip.com/"),
-    //     NSUTF8StringEncoding,
-    //     nil
-    // ).stringByTrimmingCharactersInSet(NSCharacterSet.newlineCharacterSet());
-    
     var url = "https://www.google-analytics.com/collect?";
     url += "v=1" + "&";
     // Tracking ID
-    url += "tid=" + tarkingId + "&";
+    url += "tid=" + trackingID + "&";
     // Source
     url += "ds=sketch" + MSApplicationMetadata.metadata().appVersion + "&";
     // Client ID
     url += "cid=" + uuid + "&";
-    // User IP
-    // url += "uip=" + ip + "&";
     // User GEO location
     url += "geoid=" + NSLocale.currentLocale().countryCode() + "&";
     // User language
