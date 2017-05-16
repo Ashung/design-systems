@@ -4,6 +4,7 @@
 // Author: Ashung Hung
 // Email: Ashung.hung@gmail.com
 // License: https://creativecommons.org/licenses/by-sa/4.0
+//
 
 var onOpenDocument = function(context) {
 
@@ -20,17 +21,19 @@ var onOpenDocument = function(context) {
     var checkVersion = getRemoteJson(updateURL);
     if (checkVersion) {
         
-        var remoteVersion = checkVersion.version;
+        var localPluginVersion = parseInt(localVersion);
+        var localDataVersion = parseInt(localVersion.substr(localVersion.indexOf(".") + 1));
+        var remoteDataVersion = parseInt(checkVersion.version);
         
-        log(pluginName + ": localVersion is " + localVersion + ", remoteVersion is " + remoteVersion);
+        log(pluginName + ": localVersion is " + localVersion + ", remoteDataVersion is " + remoteDataVersion);
         
-        if (localVersion < remoteVersion) {
+        if (localDataVersion < remoteDataVersion) {
 
             var localManifestPath = context.plugin.url().path() + "/Contents/Sketch/manifest.json";
             var localManifest = getLocalJson(localManifestPath);
 
             // Version
-            localManifest.version = localVersion.substring(0, localVersion.indexOf(".") + 1) + remoteVersion;
+            localManifest.version = localPluginVersion + "." + remoteDataVersion;
 
             // URL data
             var localDataPath = context.plugin.url().path() + "/Contents/Resources/data.json";
