@@ -7,6 +7,7 @@
   "appcast": "https://ashung.github.io/design-systems/appcast.xml",
   "version": "3.0",
   "identifier": "com.ashung.hung.design_systems",
+  "appcast": "https://api.sketchpacks.com/v1/plugins/com.ashung.hung.design_systems/appcast",
   "compatibleVersion": "3",
   "bundleVersion": "1",
   "commands": [
