@@ -10,23 +10,23 @@ var onOpenDocument = function(context) {
 
     var updateURL = "https://ashung.github.io/design-systems/version.json";
     var dataURL = "https://ashung.github.io/design-systems/data.json";
-    
+
     var pluginName = context.plugin.name();
 
     // Reload plugins
     AppController.sharedInstance().pluginManager().reloadPlugins();
-    
+
     // Check version
     var localVersion = context.plugin.version();
     var checkVersion = getRemoteJson(updateURL);
     if (checkVersion) {
-        
+
         var localPluginVersion = parseInt(localVersion);
         var localDataVersion = parseInt(localVersion.substr(localVersion.indexOf(".") + 1));
         var remoteDataVersion = parseInt(checkVersion.version);
-        
+
         log(pluginName + ": localVersion is " + localVersion + ", remoteDataVersion is " + remoteDataVersion);
-        
+
         if (localDataVersion < remoteDataVersion) {
 
             var localManifestPath = context.plugin.url().path() + "/Contents/Sketch/manifest.json";
@@ -50,7 +50,7 @@ var onOpenDocument = function(context) {
                 }
                 return 0;
             });
-            
+
             // Reset commands and menu items
             localManifest.commands = [
                 {
@@ -122,7 +122,7 @@ var onOpenDocument = function(context) {
             AppController.sharedInstance().pluginManager().reloadPlugins();
 
             log(pluginName + ": Data update complete.");
-            
+
         }
     } else {
         log(pluginName + ": Can't visit " + updateURL + ".");
@@ -138,12 +138,12 @@ var onRun = function(context) {
     if (localData) {
 
         var url = localData[pluginIdentifier].url;
-        
+
         if (localData[pluginIdentifier].type === "site") {
             var ref = context.plugin.homepageURL().toString().replace(new RegExp("http[s]*:\/\/"), "");
             url = url + "?ref=" + ref;
         }
-        
+
         // Google Analytics
         ga(
             "UA-99098773-2",
@@ -220,32 +220,29 @@ function ga(trackingID, appName, appId, appVersion, eventCategory, eventAction) 
         uuid = NSUUID.UUID().UUIDString();
         NSUserDefaults.standardUserDefaults().setObject_forKey(uuid, uuidKey);
     }
-    
-    var url = "https://www.google-analytics.com/collect?";
-    url += "v=1" + "&";
+
+    var url = "https://www.google-analytics.com/collect?v=1";
     // Tracking ID
-    url += "tid=" + trackingID + "&";
+    url += "&tid=" + trackingID;
     // Source
-    url += "ds=sketch" + MSApplicationMetadata.metadata().appVersion + "&";
+    url += "&ds=sketch" + MSApplicationMetadata.metadata().appVersion;
     // Client ID
-    url += "cid=" + uuid + "&";
-    // User GEO location
-    url += "geoid=" + NSLocale.currentLocale().countryCode() + "&";
+    url += "&cid=" + uuid;
     // User language
-    url += "ul=" + NSLocale.currentLocale().localeIdentifier().toLowerCase() + "&";
+    url += "&ul=" + NSLocale.currentLocale().localeIdentifier().toLowerCase();
     // pageview, screenview, event, transaction, item, social, exception, timing
-    url += "t=event" + "&";
+    url += "&t=event";
     // App Name
-    url += "an=" + appName + "&";
+    url += "&an=" + appName;
     // App ID
-    url += "aid=" + appId + "&";
+    url += "&aid=" + appId;
     // App Version
-    url += "av=" + appVersion + "&";
+    url += "&av=" + appVersion;
     // Event category
-    url += "ec=" + eventCategory + "&";
+    url += "&ec=" + eventCategory;
     // Event action
-    url += "ea=" + eventAction;
-    
+    url += "&ea=" + eventAction;
+
     var session = NSURLSession.sharedSession();
     var task = session.dataTaskWithURL(NSURL.URLWithString(NSString.stringWithString(url)));
     task.resume();
