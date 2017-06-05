@@ -4,7 +4,7 @@ A Sketch app plugin that help you find out popular design systems and download o
 
 ## Installation
 
-- ~~Search "Design Systems" from [Sketch Runner](http://sketchrunner.com/) or [Sketchpacks](https://sketchpacks.com/).~~ no support now.
+- Search "Design Systems" from [Sketch Runner](http://sketchrunner.com/) or [Sketchpacks](https://sketchpacks.com/).
 - Download [master.zip](https://github.com/Ashung/Design_Systems/archive/master.zip), unzip it, double-click the "Design_Systems.sketchplugin".
 
 ## License
