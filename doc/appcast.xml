@@ -1,0 +1,23 @@
+---
+releases:
+    -   version: 3.0
+        commitID: be4bba73329e48256056b08f370986f645f4b3f0
+---
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Design Systems</title>
+        <link>https://ashung.github.io/design-systems/appcast.xml</link>
+        <description>A Sketch app plugin that help you find out popular design systems and download official Sketch UI kit.</description>
+        <language>en</language>
+        {% for item in page.releases %}
+        <item>
+            <title>V{{ item.version }}</title>
+            <enclosure
+                url="https://github.com/Ashung/design-systems/archive/{{ item.commitID }}.zip"
+                sparkle:version="{{ item.version }}"
+                type="application/octet-stream"/>
+        </item>
+        {% endfor %}
+    </channel>
+</rss>

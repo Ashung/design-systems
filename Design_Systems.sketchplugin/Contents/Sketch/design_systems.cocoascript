@@ -1,9 +1,8 @@
 //
 // Design Systems
 // Homepage: https://github.com/Ashung/design-systems
-// Author: Ashung Hung
-// Email: Ashung.hung@gmail.com
-// License: https://creativecommons.org/licenses/by-sa/4.0
+// Author: Ashung Hung (Ashung.hung@gmail.com)
+// License: MIT
 //
 
 var onOpenDocument = function(context) {
@@ -24,8 +23,6 @@ var onOpenDocument = function(context) {
         var localPluginVersion = parseInt(localVersion);
         var localDataVersion = parseInt(localVersion.substr(localVersion.indexOf(".") + 1));
         var remoteDataVersion = parseInt(checkVersion.version);
-
-        log(pluginName + ": localVersion is " + localVersion + ", remoteDataVersion is " + remoteDataVersion);
 
         if (localDataVersion < remoteDataVersion) {
 
@@ -78,33 +75,54 @@ var onOpenDocument = function(context) {
 
             for (var i = 0; i < data.length; i++) {
 
-                var menu = {
-                    "title": data[i].title,
-                    "items": []
-                };
+                if (data[i].commands.length > 1) {
 
-                for (var j = 0; j < data[i].commands.length; j++) {
-                    if (data[i].commands[j].name === "-") {
-                        menu.items.push("-");
-                    } else {
-                        var command = {
-                            "name": data[i].commands[j].name,
-                            "identifier": "id_" + i + "_" + j,
-                            "script": "design_systems.cocoascript"
-                        };
-                        localManifest.commands.push(command);
-                        menu.items.push(command.identifier);
+                    var menu = {
+                        "title": data[i].title,
+                        "items": []
+                    };
 
-                        urls[command.identifier] = {
-                            "category": data[i].title,
-                            "name": data[i].commands[j].name,
-                            "url": data[i].commands[j].url,
-                            "type": data[i].commands[j].type || "site"
-                        };
+                    for (var j = 0; j < data[i].commands.length; j++) {
+                        if (data[i].commands[j].name === "-") {
+                            menu.items.push("-");
+                        } else {
+                            var command = {
+                                "name": data[i].commands[j].name,
+                                "identifier": "id_" + i + "_" + j,
+                                "script": "design_systems.cocoascript"
+                            };
+                            localManifest.commands.push(command);
+                            menu.items.push(command.identifier);
+
+                            urls[command.identifier] = {
+                                "category": data[i].title,
+                                "name": data[i].commands[j].name,
+                                "url": data[i].commands[j].url,
+                                "type": data[i].commands[j].type || "site"
+                            };
+                        }
                     }
-                }
 
-                localManifest.menu.items.push(menu);
+                    localManifest.menu.items.push(menu);
+
+                } else {
+
+                    var command = {
+                        "name": data[i].title,
+                        "identifier": "id_" + i + "_0",
+                        "script": "design_systems.cocoascript"
+                    };
+                    localManifest.commands.push(command);
+                    localManifest.menu.items.push(command.identifier);
+
+                    urls[command.identifier] = {
+                        "category": data[i].title,
+                        "name": data[i].title,
+                        "url": data[i].commands[0].url,
+                        "type": data[i].commands[0].type || "site"
+                    };
+
+                }
 
             }
 
@@ -121,12 +139,9 @@ var onOpenDocument = function(context) {
             // Reload plugins
             AppController.sharedInstance().pluginManager().reloadPlugins();
 
-            log(pluginName + ": Data update complete.");
-
         }
-    } else {
-        log(pluginName + ": Can't visit " + updateURL + ".");
     }
+
 };
 
 var onRun = function(context) {
@@ -138,11 +153,6 @@ var onRun = function(context) {
     if (localData) {
 
         var url = localData[pluginIdentifier].url;
-
-        if (localData[pluginIdentifier].type === "site") {
-            var ref = context.plugin.homepageURL().toString().replace(new RegExp("http[s]*:\/\/"), "");
-            url = url + "?ref=" + ref;
-        }
 
         // Google Analytics
         ga(
@@ -156,8 +166,6 @@ var onRun = function(context) {
 
         openUrlInBrowser(url);
 
-    } else {
-        log(pluginName + ": Read file " + localDataPath + " error.");
     }
 
 };

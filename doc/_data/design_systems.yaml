@@ -1,0 +1,500 @@
+
+- title: Google Material Design
+  commands:
+    - name: Home
+      url: https://material.io/
+    - name: Guidelines
+      url: https://material.io/guidelines/
+    - name: Motion
+      url: https://material.io/guidelines/motion/material-motion.html
+    - name: Style
+      url: https://material.io/guidelines/style/color.html
+    - name: Layout
+      url: https://material.io/guidelines/layout/principles.html
+    - name: Components
+      url: https://material.io/guidelines/components/bottom-navigation.html
+    - name: Growth & communications
+      url: https://material.io/guidelines/growth-communications/introduction.html
+    - name: Usability
+      url: https://material.io/guidelines/usability/accessibility.html
+    - name: Platforms
+      url: https://material.io/guidelines/platforms/platform-adaptation.html
+    - name: Resources
+      url: https://material.io/guidelines/resources/color-palettes.html
+    - name: "-"
+    - name: Icons (SVG, Font)
+      url: https://material.io/icons/
+    - name: Roboto Fonts
+      url: https://github.com/google/roboto/releases
+    - name: Noto Fonts
+      url: https://www.google.com/get/noto/
+    - name: Noto CJK Fonts
+      url: https://github.com/googlei18n/noto-cjk
+    - name: "-"
+    - name: UI Kit
+      url: https://material.io/guidelines/resources/sticker-sheets-icons.html
+
+- title: Shopify Polaris
+  commands:
+    - name: Home
+      url: https://polaris.shopify.com/
+    - name: Principles
+      url: https://polaris.shopify.com/principles/principles
+    - name: Content
+      url: https://polaris.shopify.com/content/product-content
+    - name: Visuals
+      url: https://polaris.shopify.com/visuals/colors
+    - name: Components
+      url: https://polaris.shopify.com/components/get-started
+    - name: Resources
+      url: https://polaris.shopify.com/resources/resources
+    - name: "-"
+    - name: UI Kit
+      url: https://github.com/Shopify/polaris/releases
+
+- title: Salesforce Lightning
+  commands:
+    - name: Home
+      url: https://www.lightningdesignsystem.com/
+    - name: Guidelines
+      url: https://www.lightningdesignsystem.com/guidelines/overview/
+    - name: Components
+      url: https://www.lightningdesignsystem.com/components-overview/
+    - name: Icons
+      url: https://www.lightningdesignsystem.com/icons/
+    - name: Downloads
+      url: https://www.lightningdesignsystem.com/downloads/
+    - name: "-"
+    - name: UI Kit
+      url: https://github.com/salesforce-ux/design-system-ui-kit
+
+- title: Microsoft Fluent
+  commands:
+  - name: Home
+    url: http://fluent.microsoft.com/
+  - name: Layout
+    url: https://docs.microsoft.com/windows/uwp/layout/index
+  - name: Style
+    url: https://docs.microsoft.com/windows/uwp/style/index
+  - name: Controls and Patterns
+    url: https://docs.microsoft.com/windows/uwp/controls-and-patterns/index
+  - name: Input and Devices
+    url: https://docs.microsoft.com/windows/uwp/input-and-devices/index
+  - name: Usability
+    url: https://docs.microsoft.com/windows/uwp/usability/index
+  - name: Downloads
+    url: https://docs.microsoft.com/windows/uwp/design-downloads/index
+  - name: "-"
+  - name: UI Kit
+    url: https://docs.microsoft.com/windows/uwp/design-downloads/index
+
+- title: VMWare Clarity
+  commands:
+    - name: Home
+      url: https://vmware.github.io/clarity/
+    - name: Get Started
+      url: https://vmware.github.io/clarity/get-started
+    - name: Documentation
+      url: https://vmware.github.io/clarity/documentation
+    - name: "-"
+    - name: UI Kit
+      url: https://vmware.github.io/clarity/get-started#designResources
+
+- title: IBM Carbon
+  commands:
+    - name: Home
+      url: http://carbondesignsystem.com/
+    - name: Guidelines
+      url: http://carbondesignsystem.com/guidelines/accessibility
+    - name: Style
+      url: http://carbondesignsystem.com/style/colors/swatches
+    - name: Components
+      url: http://carbondesignsystem.com/components/accordion/code
+    - name: Resources
+      url: http://carbondesignsystem.com/resources
+    - name: "-"
+    - name: UI Kit
+      url: https://github.com/carbon-design-system/carbon-design-kit
+
+- title: IBM Design Language
+  commands:
+    - name: Home
+      url: https://www.ibm.com/design/language/
+    - name: Experience
+      url: https://www.ibm.com/design/language/experience/
+    - name: Resources
+      url: https://www.ibm.com/design/language/resources/
+
+- title: Apple
+  commands:
+    - name: iOS Human Interface Guidelines
+      url: https://developer.apple.com/ios/human-interface-guidelines/
+    - name: macOS Human Interface Guidelines
+      url: https://developer.apple.com/library/prerelease/content/documentation/UserExperience/Conceptual/OSXHIGuidelines/
+    - name: watchOS Human Interface Guidelines
+      url: https://developer.apple.com/watch/human-interface-guidelines/
+    - name: tvOS Human Interface Guidelines
+      url: https://developer.apple.com/tvos/human-interface-guidelines/
+    - name: "-"
+    - name: Fonts
+      url: https://developer.apple.com/fonts/
+    - name: Designing Accessories
+      url: https://developer.apple.com/accessories/
+    - name: "-"
+    - name: iOS UI Kit
+      url: https://developer.apple.com/ios/human-interface-guidelines/resources/
+    - name: watchOS UI kit
+      url: https://developer.apple.com/watchos/human-interface-guidelines/resources/
+
+- title: Atlassian Design
+  commands:
+    - name: Home
+      url: https://atlassian.design/
+    - name: Brand
+      url: https://atlassian.design/guidelines/brand/personality
+    - name: Marketing
+      url: https://atlassian.design/guidelines/marketing/overview
+    - name: Product
+      url: https://atlassian.design/guidelines/product/overview
+
+- title: Alibaba Ant Design
+  commands:
+    - name: Home
+      url: https://ant.design/
+    - name: Guidelines
+      url: https://ant.design/docs/spec/introduce
+    - name: "-"
+    - name: 首页
+      url: https://ant.design/index-cn
+    - name: 指引
+      url: https://ant.design/docs/spec/introduce-cn
+    - name: "-"
+    - name: UI Kit
+      url: https://ant.design/docs/resource/download
+
+- title: 支付宝应用
+  commands:
+    - name: 设计规范
+      url: https://design.alipay.com/
+    - name: "-"
+    - name: 设计模版
+      url: https://design.alipay.com/resource
+
+- title: 微信 WeUI
+  commands:
+    - name: 小程序设计规范
+      url: https://mp.weixin.qq.com/debug/wxadoc/design/index.html
+    - name: 组件
+      url: https://weui.io/
+    - name: "-"
+    - name: 控件模版
+      url: https://github.com/weui/weui-design
+
+- title: Element
+  commands:
+    - name: 主页
+      url: http://element.eleme.io/
+    - name: 指南
+      url: http://element.eleme.io/#/zh-CN/guide/design
+    - name: 组件
+      url: http://element.eleme.io/#/zh-CN/component/installation
+    - name: 资源
+      url: http://element.eleme.io/#/zh-CN/resource
+
+- title: HP Grommet
+  commands:
+    - name: Home
+      url: http://grommet.io/
+    - name: Learn
+      url: http://grommet.io/docs/learn
+    - name: Templates
+      url: http://grommet.io/docs/templates
+    - name: Components
+      url: http://grommet.io/docs/components
+    - name: "-"
+    - name: Resources
+      url: http://grommet.io/docs/resources
+
+- title: Co-op Design manual
+  commands:
+    - name: Home
+      url: https://coop-design-manual.herokuapp.com/
+    - name: Design Assets
+      url: https://github.com/coopdigital/coop-design-assets/
+
+- title: U.S. Web Design Standards
+  commands:
+    - name: Home
+      url: https://standards.usa.gov/
+    - name: UI components
+      url: https://standards.usa.gov/components/
+    - name: Download
+      url: https://standards.usa.gov/getting-started/designers/
+
+- title: Sky Toolkit
+  commands:
+    - name: Home
+      url: https://www.sky.com/toolkit
+    - name: UI Kit
+      url: https://www.sky.com/toolkit/resources
+
+- title: SAP Fiori Design Guidelines
+  commands:
+    - name: Home
+      url: https://experience.sap.com/fiori-design/
+
+- title: Marvel Style Guide
+  commands:
+    - name: Home
+      url: https://marvelapp.com/styleguide/overview/introduction
+
+- title: Office UI Fabric
+  commands:
+    - name: Home
+      url: https://developer.microsoft.com/en-us/fabric
+    - name: Style
+      url: https://developer.microsoft.com/en-us/fabric#/styles
+    - name: Components
+      url: https://developer.microsoft.com/en-us/fabric#/components
+
+- title: Lonely Planet Rizzo
+  commands:
+    - name: Design Elements
+      url: http://rizzo.lonelyplanet.com/styleguide/design-elements/colours
+    - name: UI Commponetns
+      url: http://rizzo.lonelyplanet.com/styleguide/ui-components/cards
+
+- title: Lost My Name Design System
+  commands:
+    - name: Home
+      url: http://design-system.lostmy.name/
+
+- title: Mailchimp Patterns
+  commands:
+    - name: Home
+      url: http://ux.mailchimp.com/patterns
+
+- title: Louder Than Ten
+  commands:
+    - name: Manual
+      url: https://louderthanten.com/manual/
+
+- title: BBC Global Experience Language
+  commands:
+    - name: Home
+      url: http://www.bbc.co.uk/gel
+
+- title: Oracle Alta UI
+  commands:
+    - name: Home
+      url: http://www.oracle.com/webfolder/ux/middleware/alta/index.html
+
+- title: Nordnet Brand
+  commands:
+    - name: Home
+      url: https://www.nordnet.se/brand/
+
+- title: Yelp Styleguide
+  commands:
+    - name: Web
+      url: https://www.yelp.com/styleguide
+    - name: Mobile Apps
+      url: https://www.yelp.com/styleguide/mobile
+    - name: Color
+      url: https://www.yelp.com/styleguide/color
+    - name: Illustration
+      url: https://www.yelp.com/styleguide/illustrations
+    - name: Brand
+      url: https://www.yelp.com/brand
+
+- title: Trello Nachos
+  commands:
+    - name: Nachos
+      url: https://design.trello.com
+    - name: Style
+      url: https://design.trello.com/style
+    - name: Components
+      url: https://design.trello.com/components
+    - name: Resources
+      url: https://design.trello.com/resources
+
+- title: Harmony Design System
+  commands:
+    - name: Web Site
+      url: http://harmony.intuit.com/
+
+- title: Uniform - Hudl Design System
+  commands:
+    - name: Web Site
+      url: http://uniform.hudl.com/
+
+- title: Duolingo Design
+  commands:
+    - name: Web Site
+      url: https://www.duolingo.com/design/
+
+- title: Royal Canin Design Language
+  commands:
+    - name: Get Started
+      url: http://developer.royalcanin.com/
+    - name: UI Assets
+      url: http://developer.royalcanin.com/ui_assets/brand_identity/colour.html
+    - name: Resources
+      url: http://developer.royalcanin.com/resources.html
+
+- title: Photon Design System
+  commands:
+    - name: Home
+      url: https://design.firefox.com/photon/welcome.html
+
+- title: Help Scout Style Guide
+  commands:
+    - name: Web Site
+      url: http://style.helpscout.com/
+
+- title: FutureLearn Pattern Library
+  commands:
+    - name: Web Site
+      url: https://www.futurelearn.com/pattern-library
+
+- title: Brand Estonia
+  commands:
+    - name: Web Site
+      url: https://brand.estonia.ee/
+
+- title: Audi
+  commands:
+    - name: Web Site
+      url: http://www.audi.com/ci/en/renewed-brand.html
+
+- title: Backpack
+  commands:
+    - name: Web Site
+      url: https://backpack.github.io/
+
+- title: U.S. Web Design System
+  commands:
+    - name: Web Site
+      url: https://designsystem.digital.gov/
+
+- title: Stack Overflow
+  commands:
+    - name: Web Site
+      url: https://stackoverflow.design/
+
+- title: HubSspot Canvas
+  commands:
+    - name: Web Site
+      url: https://canvas.hubspot.com/
+
+- title: Meetup Swarm Design System
+  commands:
+    - name: Web Site
+      url: https://meetup.github.io/swarm-design-system/
+
+- title: Brainly style guide
+  commands:
+    - name: Web Site
+      url: https://styleguide.brainly.com/
+
+- title: GitHub Primer
+  commands:
+    - name: Web Site
+      url: https://primer.github.io/
+
+- title: JetBrains Ring UI
+  commands:
+    - name: Web Site
+      url: http://jetbrains.org/ring-ui/index.html
+
+- title: Starling Design System
+  commands:
+    - name: Web Site
+      url: http://design.acl.com/page/Home
+
+- title: Pega Design
+  commands:
+    - name: Web Site
+      url: https://design.pega.com/
+
+- title: Lexicon
+  commands:
+    - name: Web Site
+      url: https://lexicondesign.io/
+
+- title: GE Predix Design System
+  commands:
+    - name: Web Site
+      url: https://www.predix-ui.com
+
+- title: WeWork Plasma
+  commands:
+    - name: Web Site
+      url: http://plasma.guide/
+
+- title: Myob Feelix
+  commands:
+    - name: Web Site
+      url: http://feelix.myob.com/
+
+- title: MongoDB Design
+  commands:
+    - name: Web Site
+      url: http://mongodb.design/#/
+
+- title: uSwitch Living Styleguide
+  commands:
+    - name: Web Site
+      url: https://ustyle.guide/
+
+- title: Wonderbly Design System
+  commands:
+    - name: Web Site
+      url: http://design-system.lostmy.name/
+
+- title: Eurostar GLU
+  commands:
+    - name: Web Site
+      url: https://style.eurostar.com/
+
+- title: Opattern
+  commands:
+    - name: Web Site
+      url: https://ux.opower.com/opattern/
+
+- title: Front-end UI Libraries
+  commands:
+    - name: Rambler UI (React)
+      url: http://ui-kit.rambler.ru
+    - name: Blueprint (React)
+      url: http://blueprintjs.com/
+    - name: Mixpanel Design (CSS)
+      url: http://mixpanel.github.io/mixpanel-common/examples/style-guide-new/
+    - name: Solid (CSS)
+      url: https://solid.buzzfeed.com/
+    - name: purple3 (CSS)
+      url: https://purple3.herokuapp.com/
+    - name: Snacks (React)
+      url: https://instacart.github.io/Snacks/
+    - name: Bloom (React)
+      url: http://bloom.appearhere.co.uk/
+    - name: Auth0 Styleguide (CSS)
+      url: https://styleguide.auth0.com/
+    - name: Priceline One (React)
+      url: https://pricelinelabs.github.io/design-system/
+    - name: Scooter (CSS)
+      url: http://dropbox.github.io/scooter/index.html
+    - name: Hedwig
+      url: https://hedwig-docs.herokuapp.com/
+    - name: Cloudflare cf-design
+      url: https://cloudflare.github.io/cf-ui/
+    - name: Pluralsight’s Design System
+      url: http://design-system.pluralsight.com/
+    - name: Mineral UI
+      url: https://mineral-ui.com/
+    - name: Spark Design System
+      url: https://sparkdesignsystem.com/
+    - name: Pivotal UI
+      url: https://styleguide.pivotal.io/
+    - name: Mapbox Styleguide
+      url: https://www.mapbox.com/base/

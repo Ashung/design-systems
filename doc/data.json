@@ -1,0 +1,18 @@
+---
+---
+[
+{% for system in site.data.design_systems %}
+  {
+    "title": "{{ system.title }}",
+    "commands": [
+      {% for command in system.commands %}
+      {
+        "name": "{{ command.name }}",
+        "identifier": "{{ command.identifier }}",
+        "url": "{{ command.url }}"
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }{% unless forloop.last %},{% endunless %}
+{% endfor %}
+]
