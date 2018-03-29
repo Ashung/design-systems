@@ -1,5 +1,7 @@
 ---
 releases:
+    -   version: 4.0
+        commitID: af855242947a02c72d6b947098c2d2d4d53901b1
     -   version: 3.0
         commitID: be4bba73329e48256056b08f370986f645f4b3f0
 ---
